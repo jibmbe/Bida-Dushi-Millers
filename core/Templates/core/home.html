@@ -1,0 +1,292 @@
+<!-- core/templates/core/home.html -->
+{% extends 'core/base.html' %}
+
+{% block content %}
+  <style>
+    body {
+      background-color: #f8f8f8;
+      color: #333333;
+      font-family: 'Georgia', serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    h1 {
+      color: #008000;
+      text-align: center;
+      padding: 30px 0;
+      background-color: #ffffff;
+      border-bottom: 2px solid #008000;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+      font-size: 2.5em;
+    }
+
+    h1:hover {
+      background-color: #e6e6e6;
+      color: #004d00; /* Darker green on hover */
+    }
+
+    section {
+      margin: 30px 0;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    section:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .service, .feature {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 30px;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .service:hover, .feature:hover {
+      transform: scale(1.03);
+    }
+
+    i {
+      margin-bottom: 20px;
+      font-size: 48px;
+      color: #008000;
+      transition: color 0.3s ease;
+    }
+
+    .service:hover i, .feature:hover i {
+      color: #004d00; /* Darker green on hover */
+    }
+
+    h2, h3 {
+      color: #008000;
+      font-weight: bold;
+      margin-bottom: 15px;
+      transition: color 0.3s ease;
+    }
+
+    .service:hover h2, .service:hover h3, .feature:hover h2, .feature:hover h3 {
+      color: #004d00; /* Darker green on hover */
+    }
+
+    p {
+      color: #555555;
+      line-height: 1.5;
+    }
+
+    .testimonial-section {
+      margin: 30px 0;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .testimonial-section:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .testimonial {
+      margin-bottom: 30px;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .testimonial:hover {
+      transform: scale(1.03);
+    }
+
+    .testimonial p {
+      color: #555555;
+      line-height: 1.5;
+    }
+
+    .social-media {
+      margin: 30px 0;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .social-media:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .social-media a {
+      display: block;
+      margin-bottom: 10px;
+      color: #008000;
+      transition: color 0.3s ease;
+    }
+
+    .social-media a:hover {
+      color: #004d00; /* Darker green on hover */
+    }
+
+    .faq-section {
+      margin: 30px 0;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .faq-section:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .faq {
+      margin-bottom: 30px;
+      border-bottom: 1px solid #e0e0e0;
+      padding-bottom: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .faq:hover {
+      transform: scale(1.03);
+    }
+
+    .faq h3 {
+      color: #008000;
+      font-weight: bold;
+      margin-bottom: 15px;
+      transition: color 0.3s ease;
+    }
+
+    .faq p {
+      color: #555555;
+      line-height: 1.5;
+    }
+
+    .map-section {
+      margin: 30px 0;
+      padding: 30px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .map-section:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    #map {
+      width: 100%;
+      height: 300px;
+      border: 0;
+      border-radius: 5px;
+    }
+
+    #commitment {
+      color: #ffffff;
+      padding: 30px;
+      text-align: center;
+      border-radius: 10px;
+      margin-top: 30px;
+      background-color: #008000;
+      transition: background-color 0.3s ease;
+    }
+
+    #commitment:hover {
+      background-color: #006400;
+    }
+
+    #commitment h2 {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      transition: color 0.3s ease;
+    }
+
+    #commitment p {
+      color: #f8f8f8;
+      line-height: 1.5;
+    }
+  </style>
+
+  <h1>Welcome to Bida
+  
+<script src='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v2.6.1/mapbox-gl.css' rel='stylesheet' />
+
+  </h1>
+
+
+  <section id="services">
+    <!-- Your existing services section here -->
+  </section>
+
+  <section class="testimonial-section">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonial">
+      <p>"Bida Millers provides excellent maize milling services. Their quality and attention to detail are unmatched."</p>
+      <p>Samson Egwina, satisfied customer</p>
+    </div>
+    <!-- Add more testimonials as needed -->
+  </section>
+
+  <section class="social-media">
+    <h2>Connect with Us</h2>
+    <a href="#" target="_blank">Facebook</a>
+    <a href="#" target="_blank">Twitter</a>
+    <a href="#" target="_blank">Instagram</a>
+    <!-- Add more social media links as needed -->
+  </section>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq">
+      <h3>Q: What types of maize products do you offer?</h3>
+      <p>A: We offer a variety of maize products, including flour, grits, and more.</p>
+    </div>
+    <!-- Add more FAQ items as needed -->
+  </section>
+
+  <section class="map-section">
+    <h2>Visit Our Location</h2>
+    <!-- Mapbox Embed -->
+    <div id="map"></div>
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1Ijoid2FnYXR1IiwiYSI6ImNscXFjY2xnaTE4a3IycXNicnBmMTIzdHcifQ.AS9H9xMg7X-CeJSMJ_Rs0g';
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [36.8219, -1.1444], // Replace with the actual coordinates of Riabai, Kiambu
+        zoom: 12
+      });
+
+      // Add a marker at the location
+      new mapboxgl.Marker().setLngLat([36.8219, -1.1444]).addTo(map);
+    </script>
+  </section>
+
+  <section id="features">
+    <!-- Your existing features section here -->
+  </section>
+
+  <section id="commitment">
+    <h2>Our Commitment</h2>
+    <p>At Bida Millers, we are committed to providing exceptional services that go beyond milling maize. Our focus on customization, product development, quality control, packaging, and timely delivery sets us apart as a trusted partner in the maize milling industry. We are dedicated to exceeding our customers' expectations and fostering long-term relationships built on trust and excellence.</p>
+  </section>
+
+{% endblock %}

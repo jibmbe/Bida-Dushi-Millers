@@ -1,0 +1,20 @@
+<!-- core/templates/core/invoice.html -->
+{% extends 'core/base.html' %}
+
+{% block content %}
+    <h1>Invoice</h1>
+    <p>Invoice ID: {{ invoice.id }}</p>
+    <p>Service: {{ invoice.service.name }}</p>
+    <!-- Add other invoice details -->
+
+    <button onclick="printInvoice()">Print Invoice</button>
+
+    <script>
+        function printInvoice() {
+            window.print();
+        }
+    </script>
+{% endblock %}
+
+    
+{% endblock %}
