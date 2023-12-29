@@ -3,6 +3,7 @@ from django.contrib import messages
 from .models import Service, Invoice, InvoiceModel
 from django.conf import settings
 import stripe
+from django.views import View
 
 def home(request):
     return render(request, 'core/home.html')
@@ -10,6 +11,10 @@ def home(request):
 def pricing(request):
     services = Service.objects.all()
     return render(request, 'core/pricing.html', {'services': services})
+
+class PortfolioView(View):
+    def get(self, request):
+        return render(request, 'core/portfolio.html')
 
 def view_invoice(request, invoice_id):
     # Fetch the InvoiceModel instance or return a 404 response if not found
@@ -80,3 +85,5 @@ def buy_now(request, service_id):
     else:
         selected_service = Service.objects.get(pk=service_id)
         return render(request, 'core/buy_now.html', {'service': selected_service})
+    
+    

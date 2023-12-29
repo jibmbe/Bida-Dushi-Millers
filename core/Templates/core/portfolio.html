@@ -1,0 +1,45 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+  <style>
+    .card-img-custom {
+      height: 200px; /* Adjust the height as needed */
+      object-fit: cover;
+    }
+  </style>
+
+  <div class="container mt-5">
+    <h1>Bida</h1>
+    <p>Explore our collection of Bida product designs.</p>
+
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="https://wimaflourmillinglimited.com/images/bida.jpeg" class="card-img-top card-img-custom" alt="Maize Flour">
+          <div class="card-body">
+            <p class="card-text">Maize Flour</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="https://wimaflourmillinglimited.com/images/img-20180314-wa00011433630798.jpg" class="card-img-top card-img-custom" alt="Maize Germ">
+          <div class="card-body">
+            <p class="card-text">Maize Germ</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="https://wimaflourmillinglimited.com/images/Maize-Germ.jpg" class="card-img-top card-img-custom" alt="Maize Bran">
+          <div class="card-body">
+            <p class="card-text">Maize Bran</p>
+          </div>
+        </div>
+      </div>
+      <!-- Add more cards as needed -->
+    </div>
+  </div>
+{% endblock %}
