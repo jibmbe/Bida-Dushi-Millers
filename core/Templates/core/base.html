@@ -21,11 +21,6 @@
             text-align: center;
         }
 
-        h1 {
-            margin: 0;
-            font-size: 2em;
-        }
-
         nav {
             margin-top: 20px;
         }
@@ -58,11 +53,59 @@
             padding: 10px;
             text-align: center;
         }
+
+        /* Chatbot styles */
+        #chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            max-height: 300px; /* Set a maximum height */
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            overflow-y: auto;
+        }
+
+        #chat-messages {
+            padding: 10px;
+        }
+
+        #user-input {
+            width: 100%;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        #admin-chat {
+            display: none;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        #admin-messages {
+            padding: 10px;
+        }
+
+        #admin-input {
+            width: 100%;
+            padding: 10px;
+        }
+
+        #admin-button {
+            display: none; /* Initially hide admin chat button */
+            margin-top: 10px;
+            background-color: #008000;
+            color: #ffffff;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Bida</h1>
         <nav>
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
@@ -78,5 +121,75 @@
     <footer>
         &copy; 2023 Bida. All rights reserved.
     </footer>
+
+    <!-- Chatbot container -->
+    <div id="chat-container">
+        <div id="chat-messages"></div>
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <div id="admin-chat">
+            <div id="admin-messages"></div>
+            <input type="text" id="admin-input" placeholder="Admin response...">
+            <button onclick="sendAdminResponse()">Send</button>
+        </div>
+        <button id="admin-button" onclick="toggleAdminChat()">Admin Chat</button>
+    </div>
+
+    <!-- Chatbot script -->
+    <script>
+        const chatContainer = document.getElementById('chat-container');
+        const chatMessages = document.getElementById('chat-messages');
+        const adminMessages = document.getElementById('admin-messages');
+        const userInput = document.getElementById('user-input');
+        const adminInput = document.getElementById('admin-input');
+        const adminButton = document.getElementById('admin-button');
+
+        // Set the user role from the Django template context
+        const userIsAdmin = {% if user_is_admin %} true {% else %} false {% endif %};
+
+        function adminResponse(message) {
+            const response = document.createElement('div');
+            response.innerHTML = `<strong>Admin:</strong> ${message}`;
+            adminMessages.appendChild(response);
+        }
+
+        function userMessage(message) {
+            const user = document.createElement('div');
+            user.innerHTML = `<strong>User:</strong> ${message}`;
+            chatMessages.appendChild(user);
+
+            // Simulate admin response (replace with actual backend communication)
+            setTimeout(() => adminResponse("Thank you for your inquiry. We'll get back to you soon!"), 1000);
+        }
+
+        function sendAdminResponse() {
+            const message = adminInput.value;
+            if (message.trim() !== '') {
+                adminResponse(message);
+                adminInput.value = '';
+            }
+        }
+
+        function toggleAdminChat() {
+            const adminChat = document.getElementById('admin-chat');
+            adminChat.style.display = (adminChat.style.display === 'none' || adminChat.style.display === '') ? 'block' : 'none';
+        }
+
+        // Only show admin chat button if the user is an admin
+        if (userIsAdmin) {
+            adminButton.style.display = 'block';
+        } else {
+            adminButton.style.display = 'none';
+        }
+
+        userInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                const message = userInput.value;
+                if (message.trim() !== '') {
+                    userMessage(message);
+                    userInput.value = '';
+                }
+            }
+        });
+    </script>
 </body>
 </html>

@@ -4,6 +4,8 @@ from .models import Service, Invoice, InvoiceModel
 from django.conf import settings
 import stripe
 from django.views import View
+from .models import UserMessage
+from django.http import JsonResponse
 
 def home(request):
     return render(request, 'core/home.html')
@@ -15,6 +17,18 @@ def pricing(request):
 class PortfolioView(View):
     def get(self, request):
         return render(request, 'core/portfolio.html')
+    
+def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+def post(self, request, *args, **kwargs):
+        message = request.POST.get('message')
+        user = 'User'  # You can get the user dynamically, e.g., request.user.username
+
+        # Save the message to the database
+        UserMessage.objects.create(user=user, message=message)
+
+        return JsonResponse({'status': 'success'})   
 
 def view_invoice(request, invoice_id):
     # Fetch the InvoiceModel instance or return a 404 response if not found
